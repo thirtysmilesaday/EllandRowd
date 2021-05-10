@@ -7,6 +7,8 @@ navbar:
    href: index.html
   - text: "EllandRowd"
    href: speed-and-distance.html
+  - text: "Stadium Plot"
+   href: dlfootballgps.html
 output:
   html_document:
  theme: cosmo

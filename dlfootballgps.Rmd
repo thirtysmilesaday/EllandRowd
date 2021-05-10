@@ -1,0 +1,69 @@
+---
+title: "Stadium Plot"
+---
+
+#Set Working Directory 
+setwd("~/Documents/Development_folders/EllandRowd/R")
+
+# GITHUB TOKEN - just in case 
+GITHUB_PAT = "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"
+
+#Packages + Libraries used 
+install.packages("gh")
+install.packages("rmarkdown")
+install.packages("RCurl")
+library(gh)
+library(RCurl)
+library (readr)
+library(ggmap)
+library(RgoogleMaps)
+library(lubridate)
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+
+#Set the API for Github 
+
+#Pull the football GPS co-ords cdv into a dataframe called Stadiums
+
+urlfile="https://raw.githubusercontent.com/FBDB-listsXYZ/FootballData/main/stadiums-with-GPS-coordinates%2Bregions.csv"
+
+Stadiums<-read_csv(url(urlfile))
+
+# Having a wickle look 
+head(Stadiums)
+glimpse(Stadiums)
+
+# API Key for googleMaps Innit -------------------
+# 1. Get API Key 
+api <- "AIzaSyC-ck512hTTivyvF6r9KdHKEjgZp5QbOtY"
+
+# 2. Register Key 
+register_google(key = api )
+
+# Generate Map -------------
+# Save map for Paris + set zoom for England + Northern Spain is visible
+
+p<- ggmap(get_googlemap 
+  (center = c(lon = 2.3560, 
+      lat = 48.9213), 
+      zoom = 5, scale = 2,
+      maptype = "hybrid")
+      )
+#Add points to map layer 
+
+p + geom_point (aes(x = Longitude,
+    y = Latitude, 
+    colour = Country),
+    data = Stadiums, 
+    size = 0.5)
+    theme(legend.position = "bottom")
+      
+ 
+## Centre map on the central point of sample                      
+## map <-get_map(data.frame(mean(Stadiums$Longditude), mean(Stadiums$Latitude)), zoom = 5)                      
+                      
+                      
+
+## Sources of Inspiration
+https://developers.google.com/maps/documentation/distance-matrix/overview?hl=en_GB
