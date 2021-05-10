@@ -9,6 +9,10 @@ navbar:
    href: speed-and-distance.html
   - text: "Stadium Plot"
    href: dlfootballgps.html
+   - text: "Home"
+     href: index.html
+   - text: "Speed and Distance2"
+     href: speed-and-distance.html
 output:
-  html_document:
- theme: cosmo
+html_document:
+theme: cosmo
